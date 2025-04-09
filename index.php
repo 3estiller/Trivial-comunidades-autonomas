@@ -42,6 +42,14 @@ if (!isset($_POST['provincia'])) {
 <html>
 <head>
     <title>Cuestionario sobre Provincias y Comunidades Autónomas</title>
+    <style>
+        .correcto{
+            color: green;
+        }
+        .incorrecto{
+            color: red;
+        }
+    </style>
 </head>
 <body>
     <h1>Cuestionario sobre Provincias y Comunidades Autónomas</h1>
@@ -54,9 +62,9 @@ if (!isset($_POST['provincia'])) {
 
         // Verificar si la respuesta es correcta
         if ($respuestaUsuario == $respuestaCorrecta) {
-            echo "<p style='color:green;'><strong>¡Correcto!</strong> $provinciaAleatoria pertenece a $respuestaCorrecta.</p>";
+            echo "<p class=correcto><strong>¡Correcto!</strong> $provinciaAleatoria pertenece a $respuestaCorrecta.</p>";
         } else {
-            echo "<p style='color:red;'><strong>Incorrecto.</strong> $provinciaAleatoria pertenece a $respuestaCorrecta, no a $respuestaUsuario.</p>";
+            echo "<p class=incorrecto><strong>Incorrecto.</strong> $provinciaAleatoria pertenece a $respuestaCorrecta, no a $respuestaUsuario.</p>";
         }
     }
     ?>

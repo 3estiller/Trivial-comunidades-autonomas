@@ -1,25 +1,25 @@
 <?php
 $comunidades = [
-        "Andalucía" => ["Córdoba", "Sevilla", "Huelva", "Almería", "Jaén", "Cádiz", "Málaga"],
-        "Extremadura" => ["Cáceres", "Badajoz"],
-        "Murcia" => ["Murcia"],
-        "Comunidad Valenciana" => ["Valencia", "Alicante", "Castellón"],
-        "Castilla la Mancha" => ["Guadalajara", "Toledo", "Ciudad Real", "Cuenca", "Albacete"],
-        "Castilla y León" => ["Valladolid", "Burgos", "León", "Salamanca", "Ávila", "Segovia", "Zamora", "Soria", "Palencia", "Segovia", "Ávila"],
-        "Madrid" => ["Madrid"],
-        "Cataluña" => ["Barcelona", "Girona", "Lleida", "Tarragona"],
-        "Galicia" => ["A Coruña", "Lugo", "Ourense", "Pontevedra"],
-        "País Vasco" => ["Álava", "Vizcaya", "Guipúzcoa"],
-        "Cantabria" => ["Cantabria"],
-        "Asturias" => ["Asturias"],
-        "Aragón" => ["Zaragoza", "Huesca", "Teruel"],
-        "La Rioja" => ["La Rioja"],
-        "Baleares" => ["Islas Baleares"],
-        "Canarias" => ["Las Palmas", "Santa Cruz de Tenerife"],
-        "Navarra" => ["Navarra"]
-
-    
-    ];
+    "Andalucía" => ["Almería", "Cádiz", "Córdoba", "Granada", "Huelva", "Jaén", "Málaga", "Sevilla"],
+    "Cataluña" => ["Barcelona", "Girona", "Lleida", "Tarragona"],
+    "Comunidad de Madrid" => ["Madrid"],
+    "Galicia" => ["A Coruña", "Lugo", "Ourense", "Pontevedra"],
+    "Castilla y León" => ["Ávila", "Burgos", "León", "Palencia", "Salamanca", "Segovia", "Soria", "Valladolid", "Zamora"],
+    "Castilla-La Mancha" => ["Albacete", "Ciudad Real", "Cuenca", "Guadalajara", "Toledo"],
+    "Comunidad Valenciana" => ["Alicante", "Castellón", "Valencia"],
+    "País Vasco" => ["Álava", "Guipúzcoa", "Vizcaya"],
+    "Aragón" => ["Huesca", "Teruel", "Zaragoza"],
+    "Extremadura" => ["Badajoz", "Cáceres"],
+    "Asturias" => ["Asturias"],
+    "Cantabria" => ["Cantabria"],
+    "Murcia" => ["Murcia"],
+    "Navarra" => ["Navarra"],
+    "La Rioja" => ["La Rioja"],
+    "Islas Baleares" => ["Islas Baleares"],
+    "Canarias" => ["Las Palmas", "Santa Cruz de Tenerife"],
+    "Ceuta" => ["Ceuta"],
+    "Melilla" => ["Melilla"]
+];
 
 // Crear una lista de todas las provincias
 $provincias = [];
@@ -28,7 +28,6 @@ foreach ($comunidades as $comunidad => $listaProvincias) {
         $provincias[$provincia] = $comunidad;
     }
 }
-
 
 // Obtener una provincia aleatoria si no hay ninguna en POST
 if (!isset($_POST['provincia'])) {
@@ -43,14 +42,6 @@ if (!isset($_POST['provincia'])) {
 <html>
 <head>
     <title>Cuestionario sobre Provincias y Comunidades Autónomas</title>
-    <style>
-        .correcto{
-            color: green;
-        }
-        .incorrecto{
-            color: red;
-        }
-    </style>
 </head>
 <body>
     <h1>Cuestionario sobre Provincias y Comunidades Autónomas</h1>
@@ -63,9 +54,9 @@ if (!isset($_POST['provincia'])) {
 
         // Verificar si la respuesta es correcta
         if ($respuestaUsuario == $respuestaCorrecta) {
-            echo "<p class=correcto>¡Correcto! $provinciaAleatoria pertenece a $respuestaCorrecta.</p>";
+            echo "<p style='color:green;'><strong>¡Correcto!</strong> $provinciaAleatoria pertenece a $respuestaCorrecta.</p>";
         } else {
-            echo "<p class=incorrecto>Incorrecto $provinciaAleatoria pertenece a $respuestaCorrecta, no a $respuestaUsuario.</p>";
+            echo "<p style='color:red;'><strong>Incorrecto.</strong> $provinciaAleatoria pertenece a $respuestaCorrecta, no a $respuestaUsuario.</p>";
         }
     }
     ?>
@@ -74,13 +65,13 @@ if (!isset($_POST['provincia'])) {
         <p>¿A qué comunidad autónoma pertenece la provincia <strong><?php echo $provinciaAleatoria; ?></strong>?</p>
         <select name="respuesta">
             <?php
-            // Mostrar opciones con las comunidades
+            // Recorremos cada comunidad autónoma y su lista de provincias
             foreach ($comunidades as $comunidad => $listaProvincias) {
                 echo "<option value=\"$comunidad\">$comunidad</option>";
             }
             ?>
         </select>
-        <!-- Campo oculto que sirve para saber que provincia es para que lo sepa el servidor -->
+        <!-- Campo oculto para que el servidor sepa cual es la provincia  -->
         <input type="hidden" name="provincia" value="<?php echo $provinciaAleatoria; ?>">
         <br><br>
         <input type="submit" value="Responder">
